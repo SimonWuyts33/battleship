@@ -8,7 +8,7 @@ public class Ship {
 
     private final Map<Position, ShipPositionHealth> shipStatus = new HashMap<>();
 
-    public Ship(ShipType shipType, Position bowPosition, Orientation orientation) {
+    private Ship(ShipType shipType, Position bowPosition, Orientation orientation) {
         final var verticalBowPosition = bowPosition.verticalPosition();
         final var horizontalBowPosition = bowPosition.horizontalPosition();
         for (int i = 0; i < shipType.length; i++) {
@@ -27,5 +27,21 @@ public class Ship {
 
     public Set<Position> positions() {
         return shipStatus.keySet();
+    }
+
+    public boolean isAt(Position position) {
+        return shipStatus.containsKey(position);
+    }
+
+    /**
+     * @param position a position of this ship (verify with isAt
+     * @return health or null if ship is not at position
+     */
+    public ShipPositionHealth healthAt(Position position) {
+        return shipStatus.get(position);
+    }
+
+    public void damageAt(Position position) {
+        shipStatus.put(position, ShipPositionHealth.DAMAGED);
     }
 }

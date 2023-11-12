@@ -6,11 +6,49 @@ import org.junit.jupiter.api.Test;
 import static be.swsb.coderetreat.battleship.Orientation.HORIZONTAL;
 import static be.swsb.coderetreat.battleship.Orientation.VERTICAL;
 import static be.swsb.coderetreat.battleship.Position.pos;
+import static be.swsb.coderetreat.battleship.ShipPositionHealth.DAMAGED;
+import static be.swsb.coderetreat.battleship.ShipPositionHealth.OK;
 import static be.swsb.coderetreat.battleship.ShipType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 class ShipTest {
+
+    @Nested
+    class ShipHealth {
+        Ship ship = Ship.create(SUBMARINE, pos(1, 1), HORIZONTAL);
+
+        @Test
+        void shipIsCreatedHealth() {
+            assertThat(ship.healthAt(pos(1, 1))).isSameAs(OK);
+            assertThat(ship.healthAt(pos(2, 1))).isSameAs(OK);
+            assertThat(ship.healthAt(pos(3, 1))).isSameAs(OK);
+
+            assertThat(ship.healthAt(pos(4, 1))).isNull();
+        }
+
+        @Test
+        void ship_damagedAfterHit() {
+            ship.damageAt(pos(2, 1));
+
+            assertThat(ship.healthAt(pos(1, 1))).isSameAs(OK);
+            assertThat(ship.healthAt(pos(2, 1))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(3, 1))).isSameAs(OK);
+        }
+
+        @Test
+        void ship_allDamagedAfterHit() {
+            ship.damageAt(pos(1, 1));
+            ship.damageAt(pos(2, 1));
+            ship.damageAt(pos(3, 1));
+
+            assertThat(ship.healthAt(pos(1, 1))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(2, 1))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(3, 1))).isSameAs(DAMAGED);
+
+            assertThat(ship.healthAt(pos(4, 1))).isNull();
+        }
+    }
 
     @Nested
     class CreateShips {
