@@ -12,18 +12,20 @@ import static be.swsb.coderetreat.battleship.domain.ShipType.SUBMARINE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BattleStageTest {
+    private GameStage nextStage;
     private final GameStage gameStage = new BattleStage(
             Fleet.of(
                     Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
                     Ship.create(SUBMARINE, pos(4, 3), VERTICAL)),
             Fleet.of(
                     Ship.create(CARRIER, pos(3, 2), VERTICAL),
-                    Ship.create(SUBMARINE, pos(4, 5), VERTICAL))
+                    Ship.create(SUBMARINE, pos(4, 5), VERTICAL)),
+            stage -> nextStage = stage
     );
 
     @Test
     void shootAtEnemy_untilGameEnds() {
-        assertThat(gameStage.hasGameEnded()).isFalse();
+        assertThat(gameStage.hasAFleetSunk()).isFalse();
         assertThat(gameStage.renderGameBoard(Player.BLUE)).isEqualTo(
                 """
                         🛳️🛳️🛳️🛳️🛳️🌊🌊🌊🌊🌊
@@ -72,7 +74,7 @@ class BattleStageTest {
         gameStage.shootAtEnemy(Player.RED, pos(5, 3));
         gameStage.shootAtEnemy(Player.BLUE, pos(5, 5));
 
-        assertThat(gameStage.hasGameEnded()).isFalse();
+        assertThat(gameStage.hasAFleetSunk()).isFalse();
         gameStage.shootAtEnemy(Player.RED, pos(6, 3));
 
 
@@ -105,14 +107,18 @@ class BattleStageTest {
                         🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊
                         """
         );
-        assertThat(gameStage.hasGameEnded()).isTrue();
+
+        assertThat(gameStage.hasAFleetSunk()).isTrue();
+
+        gameStage.endBattle();
+        assertThat(nextStage).isNotNull().isExactlyInstanceOf(EndStage.class);
+        assertThat(nextStage.getWinner()).isSameAs(Player.RED);
 
 
     }
 
     @Test
-    void hasGameEnded() {
-        assertThat(gameStage.hasGameEnded()).isFalse();
-
+    void hasAFleetSunk() {
+        assertThat(gameStage.hasAFleetSunk()).isFalse();
     }
 }
