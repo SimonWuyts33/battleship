@@ -1,4 +1,4 @@
-package be.swsb.coderetreat.battleship;
+package be.swsb.coderetreat.battleship.domain;
 
 /**
  * Definition of a position in a matrix, using mathematical convention.

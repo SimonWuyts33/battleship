@@ -1,11 +1,14 @@
 package be.swsb.coderetreat.battleship;
 
+import be.swsb.coderetreat.battleship.domain.Fleet;
+import be.swsb.coderetreat.battleship.domain.Ship;
+import be.swsb.coderetreat.battleship.gameplay.GameBoard;
 import org.junit.jupiter.api.Test;
 
-import static be.swsb.coderetreat.battleship.Orientation.HORIZONTAL;
-import static be.swsb.coderetreat.battleship.Orientation.VERTICAL;
-import static be.swsb.coderetreat.battleship.Position.pos;
-import static be.swsb.coderetreat.battleship.ShipType.*;
+import static be.swsb.coderetreat.battleship.domain.Orientation.HORIZONTAL;
+import static be.swsb.coderetreat.battleship.domain.Orientation.VERTICAL;
+import static be.swsb.coderetreat.battleship.domain.Position.pos;
+import static be.swsb.coderetreat.battleship.domain.ShipType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GameBoardTest {

@@ -1,6 +1,9 @@
-package be.swsb.coderetreat.battleship;
+package be.swsb.coderetreat.battleship.gameplay;
 
-import static be.swsb.coderetreat.battleship.Position.pos;
+import be.swsb.coderetreat.battleship.domain.Fleet;
+import be.swsb.coderetreat.battleship.domain.Position;
+
+import static be.swsb.coderetreat.battleship.domain.Position.pos;
 
 public class GameBoard {
 

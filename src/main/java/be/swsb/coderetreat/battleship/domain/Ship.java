@@ -1,12 +1,12 @@
-package be.swsb.coderetreat.battleship;
+package be.swsb.coderetreat.battleship.domain;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static be.swsb.coderetreat.battleship.Position.pos;
-import static be.swsb.coderetreat.battleship.ShipPositionHealth.DAMAGED;
-import static be.swsb.coderetreat.battleship.ShipPositionHealth.SUNK;
+import static be.swsb.coderetreat.battleship.domain.Position.pos;
+import static be.swsb.coderetreat.battleship.domain.ShipPositionHealth.DAMAGED;
+import static be.swsb.coderetreat.battleship.domain.ShipPositionHealth.SUNK;
 
 public class Ship {
 

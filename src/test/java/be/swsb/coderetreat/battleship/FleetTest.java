@@ -1,12 +1,15 @@
 package be.swsb.coderetreat.battleship;
 
+import be.swsb.coderetreat.battleship.domain.Fleet;
+import be.swsb.coderetreat.battleship.domain.Ship;
+import be.swsb.coderetreat.battleship.domain.ShipPositionHealth;
 import org.junit.jupiter.api.Test;
 
-import static be.swsb.coderetreat.battleship.Orientation.HORIZONTAL;
-import static be.swsb.coderetreat.battleship.Orientation.VERTICAL;
-import static be.swsb.coderetreat.battleship.Position.pos;
-import static be.swsb.coderetreat.battleship.ShipType.CARRIER;
-import static be.swsb.coderetreat.battleship.ShipType.SUBMARINE;
+import static be.swsb.coderetreat.battleship.domain.Orientation.HORIZONTAL;
+import static be.swsb.coderetreat.battleship.domain.Orientation.VERTICAL;
+import static be.swsb.coderetreat.battleship.domain.Position.pos;
+import static be.swsb.coderetreat.battleship.domain.ShipType.CARRIER;
+import static be.swsb.coderetreat.battleship.domain.ShipType.SUBMARINE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class FleetTest {

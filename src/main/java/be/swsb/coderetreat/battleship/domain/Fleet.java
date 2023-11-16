@@ -1,4 +1,4 @@
-package be.swsb.coderetreat.battleship;
+package be.swsb.coderetreat.battleship.domain;
 
 import java.util.HashSet;
 import java.util.Optional;
