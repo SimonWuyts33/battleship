@@ -7,13 +7,8 @@ import static be.swsb.coderetreat.battleship.domain.Position.pos;
 
 public class GameBoard {
 
-    private final Fleet fleet;
 
-    public GameBoard(Fleet fleet) {
-        this.fleet = fleet;
-    }
-
-    public String renderToEmoji() {
+    public String renderToEmoji(Fleet fleet) {
         var lineSeparator = System.lineSeparator();
         var renderBuilder = new StringBuilder();
         int rowsMin = 1;
@@ -22,14 +17,14 @@ public class GameBoard {
         int columnsMax = 10;
         for (int row = rowsMin; row <= rowsMax; row++) {
             for (int column = columnsMin; column <= columnsMax; column++) {
-                renderBuilder.append(mapToEmoji(pos(row, column)));
+                renderBuilder.append(renderPositionToEmoji(fleet, pos(row, column)));
             }
             renderBuilder.append(lineSeparator);
         }
         return renderBuilder.toString();
     }
 
-    private String mapToEmoji(Position pos) {
+    private String renderPositionToEmoji(Fleet fleet, Position pos) {
         return fleet.shipHealthAtPosition(pos).map(
                 shipPositionHealth ->
                         switch (shipPositionHealth) {

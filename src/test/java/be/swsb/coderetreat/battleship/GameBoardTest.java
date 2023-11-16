@@ -15,9 +15,9 @@ class GameBoardTest {
 
     @Test
     void renderToEmoji_defaultSize_10x10() {
-        var ocean = new GameBoard(Fleet.of());
+        var ocean = new GameBoard();
 
-        assertThat(ocean.renderToEmoji()).isEqualTo(
+        assertThat(ocean.renderToEmoji(Fleet.of())).isEqualTo(
                 """
                         🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊
                         🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊
@@ -35,11 +35,12 @@ class GameBoardTest {
 
     @Test
     void renderToEmoji_undamagedFleet() {
-        var ocean = new GameBoard(Fleet.of(
+        var fleet = Fleet.of(
                 Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
-                Ship.create(SUBMARINE, pos(4, 3), VERTICAL)));
+                Ship.create(SUBMARINE, pos(4, 3), VERTICAL));
+        var ocean = new GameBoard();
 
-        assertThat(ocean.renderToEmoji()).isEqualTo(
+        assertThat(ocean.renderToEmoji(fleet)).isEqualTo(
                 """
                         🛳️🛳️🛳️🛳️🛳️🌊🌊🌊🌊🌊
                         🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊
@@ -61,12 +62,12 @@ class GameBoardTest {
         var fleet = Fleet.of(
                 Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
                 Ship.create(SUBMARINE, pos(4, 3), VERTICAL));
-        var ocean = new GameBoard(fleet);
+        var ocean = new GameBoard();
 
         fleet.shootAt(pos(1, 4));
         fleet.shootAt(pos(6, 3));
 
-        assertThat(ocean.renderToEmoji()).isEqualTo(
+        assertThat(ocean.renderToEmoji(fleet)).isEqualTo(
                 """
                         🛳️🛳️🛳️💥🛳️🌊🌊🌊🌊🌊
                         🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊
@@ -88,13 +89,13 @@ class GameBoardTest {
                 Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
                 Ship.create(SUBMARINE, pos(4, 3), VERTICAL),
                 Ship.create(PATROL_BOAT, pos(4, 9), HORIZONTAL));
-        var ocean = new GameBoard(fleet);
+        var ocean = new GameBoard();
 
         fleet.shootAt(pos(1, 4));
         fleet.shootAt(pos(4, 9));
         fleet.shootAt(pos(4, 10));
 
-        assertThat(ocean.renderToEmoji()).isEqualTo(
+        assertThat(ocean.renderToEmoji(fleet)).isEqualTo(
                 """
                         🛳️🛳️🛳️💥🛳️🌊🌊🌊🌊🌊
                         🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊
