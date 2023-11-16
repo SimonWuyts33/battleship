@@ -21,32 +21,32 @@ class ShipTest {
         @Test
         void shipIsCreatedHealth() {
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(OK);
-            assertThat(ship.healthAt(pos(2, 1))).isSameAs(OK);
-            assertThat(ship.healthAt(pos(3, 1))).isSameAs(OK);
+            assertThat(ship.healthAt(pos(1, 2))).isSameAs(OK);
+            assertThat(ship.healthAt(pos(1, 3))).isSameAs(OK);
 
-            assertThat(ship.healthAt(pos(4, 1))).isNull();
+            assertThat(ship.healthAt(pos(1, 4))).isNull();
         }
 
         @Test
         void ship_damagedAfterHit() {
-            ship.damageAt(pos(2, 1));
+            ship.damageAt(pos(1, 2));
 
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(OK);
-            assertThat(ship.healthAt(pos(2, 1))).isSameAs(DAMAGED);
-            assertThat(ship.healthAt(pos(3, 1))).isSameAs(OK);
+            assertThat(ship.healthAt(pos(1, 2))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(1, 3))).isSameAs(OK);
         }
 
         @Test
         void ship_allDamagedAfterHit() {
             ship.damageAt(pos(1, 1));
-            ship.damageAt(pos(2, 1));
-            ship.damageAt(pos(3, 1));
+            ship.damageAt(pos(1, 2));
+            ship.damageAt(pos(1, 3));
 
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(DAMAGED);
-            assertThat(ship.healthAt(pos(2, 1))).isSameAs(DAMAGED);
-            assertThat(ship.healthAt(pos(3, 1))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(1, 2))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(1, 3))).isSameAs(DAMAGED);
 
-            assertThat(ship.healthAt(pos(4, 1))).isNull();
+            assertThat(ship.healthAt(pos(1, 4))).isNull();
         }
     }
 
@@ -61,17 +61,17 @@ class ShipTest {
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(5)
-                    .containsExactlyInAnyOrder(pos(1, 1), pos(2, 1), pos(3, 1), pos(4, 1), pos(5, 1));
+                    .containsExactlyInAnyOrder(pos(1, 1), pos(1, 2), pos(1, 3), pos(1, 4), pos(1, 5));
         }
 
         @Test
         void createCarrierVertically() {
-            var ship = Ship.create(CARRIER, pos(2, 1), VERTICAL);
+            var ship = Ship.create(CARRIER, pos(1, 2), VERTICAL);
 
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(5)
-                    .containsExactlyInAnyOrder(pos(2, 1), pos(2, 2), pos(2, 3), pos(2, 4), pos(2, 5));
+                    .containsExactlyInAnyOrder(pos(1, 2), pos(2, 2), pos(3, 2), pos(4, 2), pos(5, 2));
         }
 
         @Test
@@ -81,17 +81,17 @@ class ShipTest {
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(4)
-                    .containsExactlyInAnyOrder(pos(1, 1), pos(2, 1), pos(3, 1), pos(4, 1));
+                    .containsExactlyInAnyOrder(pos(1, 1), pos(1, 2), pos(1, 3), pos(1, 4));
         }
 
         @Test
         void createBattleshipVertically() {
-            var ship = Ship.create(BATTLESHIP, pos(2, 1), VERTICAL);
+            var ship = Ship.create(BATTLESHIP, pos(1, 2), VERTICAL);
 
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(4)
-                    .containsExactlyInAnyOrder(pos(2, 1), pos(2, 2), pos(2, 3), pos(2, 4));
+                    .containsExactlyInAnyOrder(pos(1, 2), pos(2, 2), pos(3, 2), pos(4, 2));
         }
 
         @Test
@@ -101,17 +101,17 @@ class ShipTest {
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(3)
-                    .containsExactlyInAnyOrder(pos(1, 1), pos(2, 1), pos(3, 1));
+                    .containsExactlyInAnyOrder(pos(1, 1), pos(1, 2), pos(1, 3));
         }
 
         @Test
         void createDestroyerVertically() {
-            var ship = Ship.create(DESTROYER, pos(2, 1), VERTICAL);
+            var ship = Ship.create(DESTROYER, pos(1, 2), VERTICAL);
 
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(3)
-                    .containsExactlyInAnyOrder(pos(2, 1), pos(2, 2), pos(2, 3));
+                    .containsExactlyInAnyOrder(pos(1, 2), pos(2, 2), pos(3, 2));
         }
 
         @Test
@@ -121,17 +121,17 @@ class ShipTest {
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(3)
-                    .containsExactlyInAnyOrder(pos(1, 1), pos(2, 1), pos(3, 1));
+                    .containsExactlyInAnyOrder(pos(1, 1), pos(1, 2), pos(1, 3));
         }
 
         @Test
         void createSubmarineVertically() {
-            var ship = Ship.create(SUBMARINE, pos(2, 1), VERTICAL);
+            var ship = Ship.create(SUBMARINE, pos(1, 2), VERTICAL);
 
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(3)
-                    .containsExactlyInAnyOrder(pos(2, 1), pos(2, 2), pos(2, 3));
+                    .containsExactlyInAnyOrder(pos(1, 2), pos(2, 2), pos(3, 2));
         }
 
         @Test
@@ -141,17 +141,17 @@ class ShipTest {
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(2)
-                    .containsExactlyInAnyOrder(pos(1, 1), pos(2, 1));
+                    .containsExactlyInAnyOrder(pos(1, 1), pos(1, 2));
         }
 
         @Test
         void createPatrolBoatVertically() {
-            var ship = Ship.create(PATROL_BOAT, pos(2, 1), VERTICAL);
+            var ship = Ship.create(PATROL_BOAT, pos(1, 2), VERTICAL);
 
             assertThat(ship).isExactlyInstanceOf(Ship.class);
             assertThat(ship.positions())
                     .hasSize(2)
-                    .containsExactlyInAnyOrder(pos(2, 1), pos(2, 2));
+                    .containsExactlyInAnyOrder(pos(1, 2), pos(2, 2));
         }
     }
 }

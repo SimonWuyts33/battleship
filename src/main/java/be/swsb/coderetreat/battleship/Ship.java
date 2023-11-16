@@ -4,19 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static be.swsb.coderetreat.battleship.Position.*;
+
 public class Ship {
 
     private final Map<Position, ShipPositionHealth> shipStatus = new HashMap<>();
 
     private Ship(ShipType shipType, Position bowPosition, Orientation orientation) {
-        final var verticalBowPosition = bowPosition.verticalPosition();
-        final var horizontalBowPosition = bowPosition.horizontalPosition();
+        final var verticalBowPosition = bowPosition.rowNumber();
+        final var horizontalBowPosition = bowPosition.columnNumber();
         for (int i = 0; i < shipType.length; i++) {
             switch (orientation) {
                 case HORIZONTAL ->
-                        shipStatus.put(Position.pos(horizontalBowPosition + i, verticalBowPosition), ShipPositionHealth.OK);
+                        shipStatus.put(pos(verticalBowPosition, horizontalBowPosition + i), ShipPositionHealth.OK);
                 case VERTICAL ->
-                        shipStatus.put(Position.pos(horizontalBowPosition, verticalBowPosition + i), ShipPositionHealth.OK);
+                        shipStatus.put(pos(verticalBowPosition + i, horizontalBowPosition), ShipPositionHealth.OK);
             }
         }
     }
