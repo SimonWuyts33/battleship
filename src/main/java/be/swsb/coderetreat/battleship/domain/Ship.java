@@ -51,4 +51,8 @@ public class Ship {
             shipStatus.keySet().forEach(pos -> shipStatus.put(pos, SUNK));
         }
     }
+
+    public boolean isSunk() {
+        return shipStatus.containsValue(SUNK);
+    }
 }

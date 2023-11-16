@@ -19,11 +19,12 @@ class ShipTest {
         Ship ship = Ship.create(SUBMARINE, pos(1, 1), HORIZONTAL);
 
         @Test
-        void shipIsCreatedHealth() {
+        void shipIsCreatedHealthy() {
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(OK);
             assertThat(ship.healthAt(pos(1, 2))).isSameAs(OK);
             assertThat(ship.healthAt(pos(1, 3))).isSameAs(OK);
 
+            assertThat(ship.isSunk()).isFalse();
             assertThat(ship.healthAt(pos(1, 4))).isNull();
         }
 
@@ -41,6 +42,7 @@ class ShipTest {
             ship.damageAt(pos(1, 1));
             ship.damageAt(pos(1, 2));
 
+            assertThat(ship.isSunk()).isFalse();
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(DAMAGED);
             assertThat(ship.healthAt(pos(1, 2))).isSameAs(DAMAGED);
             assertThat(ship.healthAt(pos(1, 3))).isSameAs(OK);
@@ -50,6 +52,7 @@ class ShipTest {
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(SUNK);
             assertThat(ship.healthAt(pos(1, 2))).isSameAs(SUNK);
             assertThat(ship.healthAt(pos(1, 3))).isSameAs(SUNK);
+            assertThat(ship.isSunk()).isTrue();
 
             assertThat(ship.healthAt(pos(1, 4))).isNull();
         }

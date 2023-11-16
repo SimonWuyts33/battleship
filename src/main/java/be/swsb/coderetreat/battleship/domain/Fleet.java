@@ -30,4 +30,8 @@ public class Fleet {
     public void shootAt(Position position) {
         shipAt(position).ifPresent(ship -> ship.damageAt(position));
     }
+
+    public boolean isSunk() {
+        return ships.stream().allMatch(Ship::isSunk);
+    }
 }
