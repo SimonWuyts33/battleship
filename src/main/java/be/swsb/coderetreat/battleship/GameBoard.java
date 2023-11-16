@@ -2,11 +2,11 @@ package be.swsb.coderetreat.battleship;
 
 import static be.swsb.coderetreat.battleship.Position.pos;
 
-public class Ocean {
+public class GameBoard {
 
     private final Fleet fleet;
 
-    public Ocean(Fleet fleet) {
+    public GameBoard(Fleet fleet) {
         this.fleet = fleet;
     }
 

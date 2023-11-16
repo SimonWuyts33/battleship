@@ -8,11 +8,11 @@ import static be.swsb.coderetreat.battleship.Position.pos;
 import static be.swsb.coderetreat.battleship.ShipType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class OceanTest {
+class GameBoardTest {
 
     @Test
     void renderToEmoji_defaultSize_10x10() {
-        var ocean = new Ocean(Fleet.of());
+        var ocean = new GameBoard(Fleet.of());
 
         assertThat(ocean.renderToEmoji()).isEqualTo(
                 """
@@ -32,7 +32,7 @@ class OceanTest {
 
     @Test
     void renderToEmoji_undamagedFleet() {
-        var ocean = new Ocean(Fleet.of(
+        var ocean = new GameBoard(Fleet.of(
                 Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
                 Ship.create(SUBMARINE, pos(4, 3), VERTICAL)));
 
@@ -58,7 +58,7 @@ class OceanTest {
         var fleet = Fleet.of(
                 Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
                 Ship.create(SUBMARINE, pos(4, 3), VERTICAL));
-        var ocean = new Ocean(fleet);
+        var ocean = new GameBoard(fleet);
 
         fleet.shootAt(pos(1, 4));
         fleet.shootAt(pos(6, 3));
@@ -85,7 +85,7 @@ class OceanTest {
                 Ship.create(CARRIER, pos(1, 1), HORIZONTAL),
                 Ship.create(SUBMARINE, pos(4, 3), VERTICAL),
                 Ship.create(PATROL_BOAT, pos(4, 9), HORIZONTAL));
-        var ocean = new Ocean(fleet);
+        var ocean = new GameBoard(fleet);
 
         fleet.shootAt(pos(1, 4));
         fleet.shootAt(pos(4, 9));
