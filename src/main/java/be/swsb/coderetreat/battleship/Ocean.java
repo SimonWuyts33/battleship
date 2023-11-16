@@ -1,19 +1,39 @@
 package be.swsb.coderetreat.battleship;
 
+import static be.swsb.coderetreat.battleship.Position.pos;
+
 public class Ocean {
 
-    private final int rowsMin = 1;
-    private final int rowsMax = 10;
-    private final int columnsMin = 1;
-    private final int columnsMax = 10;
+    private final Fleet fleet;
+
+    public Ocean(Fleet fleet) {
+        this.fleet = fleet;
+    }
 
     public String renderToEmoji() {
         var lineSeparator = System.lineSeparator();
-        var renderBuilder = new StringBuilder(210);
+        var renderBuilder = new StringBuilder();
+        int rowsMin = 1;
+        int rowsMax = 10;
+        int columnsMin = 1;
+        int columnsMax = 10;
         for (int row = rowsMin; row <= rowsMax; row++) {
-            renderBuilder.append("🌊".repeat(columnsMax));
+            for (int column = columnsMin; column <= columnsMax; column++) {
+                renderBuilder.append(mapToEmoji(pos(row, column)));
+            }
             renderBuilder.append(lineSeparator);
         }
         return renderBuilder.toString();
+    }
+
+    private String mapToEmoji(Position pos) {
+        return fleet.shipHealthAtPosition(pos).map(
+                shipPositionHealth ->
+                        switch (shipPositionHealth) {
+                            case OK -> "🛳️";
+                            case DAMAGED -> "💥";
+                            case SUNK -> "🛟";
+                        }
+        ).orElse("🌊");
     }
 }

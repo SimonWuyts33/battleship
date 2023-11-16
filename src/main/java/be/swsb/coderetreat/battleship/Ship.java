@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static be.swsb.coderetreat.battleship.Position.*;
+import static be.swsb.coderetreat.battleship.Position.pos;
+import static be.swsb.coderetreat.battleship.ShipPositionHealth.DAMAGED;
+import static be.swsb.coderetreat.battleship.ShipPositionHealth.SUNK;
 
 public class Ship {
 
@@ -44,6 +46,9 @@ public class Ship {
     }
 
     public void damageAt(Position position) {
-        shipStatus.put(position, ShipPositionHealth.DAMAGED);
+        shipStatus.put(position, DAMAGED);
+        if (shipStatus.values().stream().allMatch(health -> health == DAMAGED)) {
+            shipStatus.keySet().forEach(pos -> shipStatus.put(pos, SUNK));
+        }
     }
 }

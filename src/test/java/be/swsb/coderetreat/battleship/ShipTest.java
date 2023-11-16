@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import static be.swsb.coderetreat.battleship.Orientation.HORIZONTAL;
 import static be.swsb.coderetreat.battleship.Orientation.VERTICAL;
 import static be.swsb.coderetreat.battleship.Position.pos;
-import static be.swsb.coderetreat.battleship.ShipPositionHealth.DAMAGED;
-import static be.swsb.coderetreat.battleship.ShipPositionHealth.OK;
+import static be.swsb.coderetreat.battleship.ShipPositionHealth.*;
 import static be.swsb.coderetreat.battleship.ShipType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,14 +36,19 @@ class ShipTest {
         }
 
         @Test
-        void ship_allDamagedAfterHit() {
+        void ship_sunkAfterHit() {
             ship.damageAt(pos(1, 1));
             ship.damageAt(pos(1, 2));
-            ship.damageAt(pos(1, 3));
 
             assertThat(ship.healthAt(pos(1, 1))).isSameAs(DAMAGED);
             assertThat(ship.healthAt(pos(1, 2))).isSameAs(DAMAGED);
-            assertThat(ship.healthAt(pos(1, 3))).isSameAs(DAMAGED);
+            assertThat(ship.healthAt(pos(1, 3))).isSameAs(OK);
+
+            ship.damageAt(pos(1, 3));
+
+            assertThat(ship.healthAt(pos(1, 1))).isSameAs(SUNK);
+            assertThat(ship.healthAt(pos(1, 2))).isSameAs(SUNK);
+            assertThat(ship.healthAt(pos(1, 3))).isSameAs(SUNK);
 
             assertThat(ship.healthAt(pos(1, 4))).isNull();
         }
